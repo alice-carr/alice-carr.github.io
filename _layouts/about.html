@@ -1,0 +1,42 @@
+---
+layout: page
+---
+<head>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            padding-left: 0px;
+        }
+        .column {
+            flex: 1;
+            padding-right: 20px;
+            box-sizing: border-box;
+        }
+        @media (min-width: 700px) {
+            .container {
+                flex-direction: row !important;
+            } 
+            .about-img {
+                padding-bottom: 10px;
+            }
+        }
+        .about-img {
+            max-width: 95%; 
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="column left-column">
+            <p>Alice Carr is a British-Australian painter and printmaker based in Edinburgh. The work she produces is rooted in the lines between field and city, human and animal. Using thick layers, expressive mark making and various mediums she allows stories to emerge from within images, sometimes unsettling, sometimes humorous.</p>
+            <p>Her recent work explores the coastline as a place of boundaries, where land meets sea and humans meet nature. The terrifying power of the sea is placed alongside human relationships that try to stand apart from nature but cannot.</p>
+            <p>Alice received her BA in medieval languages from the University of Cambridge in 2012. She attended the Royal Drawing School’s Online Drawing Development Year in 2022, and Turps Correspondence Course in 2023. Her paintings have been shown in galleries, art fairs, and held in collections in Europe, Australia and North America.</p>
+        </div>
+        <div class="column right-column">
+            <img src="/commons/me.jpg" class="about-img"></img>
+        </div>
+    </div>
+</body>
+</html>

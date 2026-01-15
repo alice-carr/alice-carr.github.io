@@ -1,0 +1,79 @@
+:root {
+  --body-leading: 1.6;
+  --container-padding: 1.5em;
+  --container-width: 1260px;
+  --gallery-gap: 1.5em;
+  --gallery-items-per-row: 1;
+}
+
+* {
+  &,
+  &::before,
+  &::after {
+    box-sizing: border-box;
+  }
+}
+
+body {
+  margin: 0;
+  font: 1em/var(--body-leading) sans-serif;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+  height: auto;
+}
+
+.page-container {
+  padding: var(--container-padding);
+  max-width: var(--container-width);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+.img-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gallery-gap);
+//   max-width: 1200px; TODO: test if we need this. 
+
+  img {
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+}
+
+
+.img-gallery__item {
+  flex: 0 0
+    calc(
+      100% / var(--gallery-items-per-row) - var(--gallery-gap) *
+        (var(--gallery-items-per-row) - 1) / var(--gallery-items-per-row)
+    );
+
+  figure { margin: 0 }
+
+  figcaption {
+    margin-top: .5rem;
+    font-weight: bold;
+  }
+}
+
+@media only screen and (width >= 1024px) {
+  .img-gallery {
+    --gallery-items-per-row: 4;
+  }
+}
+@media only screen and (768px < width < 1024px) {
+  .img-gallery {
+    --gallery-items-per-row: 3;
+  }
+}
+@media only screen and (540px < width < 768px) {
+  .img-gallery {
+    --gallery-items-per-row: 2;
+  }
+}
+

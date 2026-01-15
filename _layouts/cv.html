@@ -1,0 +1,67 @@
+---
+layout: page
+---
+<head>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            padding-left: 0px;
+        }
+        .column {
+            flex: 1;
+            padding-right: 20px;
+            box-sizing: border-box;
+        }
+        @media (min-width: 700px) {
+            .container {
+                flex-direction: row !important;
+            } 
+            .column {
+                padding-left: 25px;
+                padding-bottom: 25px;   
+            }
+        }
+        @media (width < 730px) {
+            .right-column {
+                padding-bottom: 60px;
+            }
+        }
+        .cv-list {
+            line-height: 1.25;
+            font-size: 0.95rem;
+        }
+        .exhibitions-list {
+            padding-top: 10px;  
+        }
+        .cv-image {
+            height: 90%;
+            padding-left: 15px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container" >
+        <div class="column left-column">
+            <p><b>education</b></p>
+                <p class="cv-list">2021–2023  	Turps Banana: Correspondence Course</p>
+                <p class="cv-list">2022–2023 	Royal Drawing School: Online Drawing Development Year</p>
+                <p class="cv-list">2009–2012	University of Cambridge: BA Anglo-Saxon, Norse & Celtic</p>
+            <p></p>
+            <p class="exhibitions-list"><b>select exhibitions</b ></p>
+                <p class="cv-list">Lido Winter Show, Margate, UK, December 2025</p>
+                <p class="cv-list">Let the Dust Settle, Terrace Galleries, London, November 2025</p>
+                <p class="cv-list">Miniature Masters, Canal boat contemporary, London, October 2025</p>
+                <p class="cv-list">Paper Project, Platforms Project, Athens, Greece, October 2025</p>
+                <p class="cv-list">The Living Mountain, Partnership Editions, UK, June 2025</p>
+                <p class="cv-list">Partnership Editions, Open Call Winner, 2023</p>
+                <p class="cv-list">Dumfries House Residency, 2023</p>
+
+        </div>
+        <div class="column right-column">
+          <img class="cv-image" src="/commons/bird_on_wall.jpg"></img>
+        </div>
+    </div>
+</body>
+</html>

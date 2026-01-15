@@ -1,0 +1,51 @@
+---
+layout: default
+---
+<head>
+  <style>
+    @media only screen and (width < 821px) {
+      .homepage-image {
+        max-width: 450% !important;
+        max-height: 200% !important;
+      }
+    }
+
+    @media only screen and (width >= 821px) {
+      .homepage-image {
+        max-width: 95% !important;
+      }
+    }
+  </style>
+</head>
+
+{% include lang.html %}
+
+{% assign all_pinned = site.posts | where: 'pin', 'true' %}
+{% assign all_normal = site.posts | where_exp: 'item', 'item.pin != true and item.hidden != true' %}
+
+{% assign posts = '' | split: '' %}
+
+<!-- Get pinned posts on current page -->
+
+{% assign visible_start = paginator.page | minus: 1 | times: paginator.per_page %}
+{% assign visible_end = visible_start | plus: paginator.per_page %}
+
+{% if all_pinned.size > visible_start %}
+  {% if all_pinned.size > visible_end %}
+    {% assign pinned_size = paginator.per_page %}
+  {% else %}
+    {% assign pinned_size = all_pinned.size | minus: visible_start %}
+  {% endif %}
+
+  {% for i in (visible_start..all_pinned.size) limit: pinned_size %}
+    {% assign posts = posts | push: all_pinned[i] %}
+  {% endfor %}
+{% else %}
+  {% assign pinned_size = 0 %}
+{% endif %}
+
+<!-- Get normal posts on current page -->
+
+<div>
+  <img src="commons/studio_shot_homepage.jpg" alt="photo of studio" style="padding-top: 20px;" class="homepage-image" />
+</div>

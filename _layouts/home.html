@@ -4,15 +4,20 @@ layout: default
 <head>
   <style>
     @media only screen and (width < 821px) {
-      .homepage-image {
-        max-width: 450% !important;
-        max-height: 200% !important;
+      .homepage-image-large {
+        display: none;
+      }
+      .homepage-image-small {
+        height: 100% !important;
       }
     }
 
     @media only screen and (width >= 821px) {
-      .homepage-image {
+      .homepage-image-large {
         max-width: 95% !important;
+      }
+      .homepage-image-small {
+        display: none;
       }
     }
   </style>
@@ -47,5 +52,6 @@ layout: default
 <!-- Get normal posts on current page -->
 
 <div>
-  <!-- <img src="commons/studio_shot_homepage.jpg" alt="photo of studio" style="padding-top: 20px;" class="homepage-image" /> -->
+  <div class="preview-img  shimmer"><img src="/commons/studio_shot_homepage.jpg" alt="photo of studio" style="padding-top: 20px;" class="homepage-image-large" loading="lazy"></div>
+  <div class="preview-img  shimmer"><img src="/commons/studio_wall.jpg" alt="photo of studio" style="padding-top: 20px;" class="homepage-image-small" loading="lazy"></div>
 </div>

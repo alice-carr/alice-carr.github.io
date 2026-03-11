@@ -3,8 +3,8 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://localhost:4000/</id>
   <title>Alice Carr</title>
-  <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2026-01-16T00:23:11+08:00</updated>
+  <subtitle>Alice Carr, painter &amp; printmaker based in Edinburgh</subtitle>
+  <updated>2026-03-11T16:54:27+08:00</updated>
   <author>
     <name>alice carr</name>
     <uri>http://localhost:4000/</uri>

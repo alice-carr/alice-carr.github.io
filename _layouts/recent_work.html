@@ -1,150 +1,234 @@
 ---
 layout: page
-# The Archives of posts.
 ---
-<head>
-    <style>
 
-    </style>
-</head>
+{% assign artworks = site.static_files | where_exp: "file", "file.path contains '/commons/portfolio/'" | sort_natural: "path" %}
 
-<!-- https://blog.logrocket.com/responsive-image-gallery-css-flexbox/ -->
+<style>
+  .artwork-thumbnail {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
 
+  .artwork-thumbnail:focus-visible,
+  .artwork-dialog button:focus-visible {
+    outline: 2px solid var(--link-color);
+    outline-offset: 3px;
+  }
+
+  .artwork-dialog {
+    box-sizing: border-box;
+    width: min(90vw, 72rem);
+    max-width: none;
+    max-height: 90vh;
+    overflow: hidden;
+    padding: 1.5rem;
+    border: 0;
+    background: var(--card-bg);
+    color: var(--text-color);
+  }
+
+  .artwork-dialog::backdrop {
+    background: rgb(0 0 0 / 80%);
+  }
+
+  .artwork-dialog__close {
+    display: block;
+    margin: 0 0 0.75rem auto;
+  }
+
+  .artwork-dialog__carousel {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .artwork-dialog__control,
+  .artwork-dialog__close {
+    padding: 0.5rem;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .artwork-dialog__content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(10rem, 0.35fr);
+    align-items: end;
+    gap: 1.5rem;
+    min-width: 0;
+  }
+
+  .artwork-dialog__image {
+    display: block;
+    width: 100%;
+    max-height: calc(90vh - 9rem);
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+
+  .artwork-dialog__details {
+    max-width: 20rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+
+  .artwork-dialog__details dl {
+    margin: 0;
+  }
+
+  .artwork-dialog__details div + div {
+    margin-top: 0.3rem;
+  }
+
+  .artwork-dialog__details dt {
+    font-weight: 600;
+  }
+
+  .artwork-dialog__details dd {
+    margin: 0;
+    color: inherit;
+  }
+
+  .artwork-dialog__count {
+    margin: 0.75rem 0 0;
+    color: var(--text-muted-color);
+    text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    .artwork-dialog {
+      padding: 1rem;
+    }
+
+    .artwork-dialog__image {
+      max-height: calc(90vh - 14rem);
+    }
+
+    .artwork-dialog__content {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.75rem;
+    }
+
+    .artwork-dialog__details {
+      max-width: none;
+    }
+  }
+</style>
 
 <div class="img-gallery">
-  <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_1.jpg" width="264px" height="372px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
-  <div class="img-gallery__item">
-        <figure>
-      <img src="/commons/recent_work/image_2.jpeg" width="264px" height="388px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
-  <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_3.jpeg" width="264px" height="367px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
+  {% for artwork in artworks %}
+    {% assign artwork_filename = artwork.path | split: "/" | last %}
+    {% assign artwork_details = site.data.artworks[artwork_filename] %}
     <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_4.jpeg" width="368px" height="264px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="{{ artwork.path | relative_url | escape }}"
+          data-artwork-title="{{ artwork_details.title | default: 'Add artwork title' | escape }}"
+          data-artwork-medium="{{ artwork_details.medium | default: 'Add medium' | escape }}"
+          data-artwork-dimensions="{{ artwork_details.dimensions | default: 'Add dimensions' | escape }}"
+          data-artwork-year="{{ artwork_details.year | default: 'Add year' | escape }}"
+          aria-label="View artwork {{ forloop.index }}"
+        >
+          <img
+            src="{{ artwork.path | relative_url | escape }}"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  {% endfor %}
+</div>
 
-      <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_5.jpeg" width="353px" height="264px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
+<dialog class="artwork-dialog" aria-label="Artwork carousel">
+  <button class="artwork-dialog__close" type="button" data-artwork-close aria-label="Close carousel">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="artwork-dialog__carousel">
+    <button class="artwork-dialog__control" type="button" data-artwork-previous aria-label="Previous image">
+      <span aria-hidden="true">&lsaquo;</span>
+    </button>
+    <div class="artwork-dialog__content">
+      <img class="artwork-dialog__image" data-artwork-image src="" alt="">
+      <div class="artwork-dialog__details">
+        <dl>
+          <dd data-artwork-title></dd>
+          <dd data-artwork-medium></dd>
+          <dd data-artwork-dimensions></dd>
+          <dd data-artwork-year></dd>
+        </dl>
+      </div>
+    </div>
+    <button class="artwork-dialog__control" type="button" data-artwork-next aria-label="Next image">
+      <span aria-hidden="true">&rsaquo;</span>
+    </button>
+  </div>
+  <p class="artwork-dialog__count" aria-live="polite">
+    <span data-artwork-current></span> / {{ artworks.size }}
+  </p>
+</dialog>
 
-    <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_6.jpeg" width="264px" height="634px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
+<script>
+  (() => {
+    const thumbnails = Array.from(document.querySelectorAll('.artwork-thumbnail'));
+    const dialog = document.querySelector('.artwork-dialog');
+    if (!dialog || thumbnails.length === 0) return;
 
-    <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_7.jpeg" width="264px" height="187px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
+    const image = dialog.querySelector('[data-artwork-image]');
+    const counter = dialog.querySelector('[data-artwork-current]');
+    const details = {
+      title: dialog.querySelector('[data-artwork-title]'),
+      medium: dialog.querySelector('[data-artwork-medium]'),
+      dimensions: dialog.querySelector('[data-artwork-dimensions]'),
+      year: dialog.querySelector('[data-artwork-year]')
+    };
+    let currentIndex = 0;
 
-    <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_9.jpeg" width="264px" height="225px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
+    const showArtwork = (index) => {
+      currentIndex = (index + thumbnails.length) % thumbnails.length;
+      const thumbnail = thumbnails[currentIndex];
+      image.src = thumbnail.dataset.artworkSrc;
+      image.alt = thumbnail.dataset.artworkTitle;
+      details.title.textContent = thumbnail.dataset.artworkTitle;
+      details.medium.textContent = thumbnail.dataset.artworkMedium;
+      details.dimensions.textContent = thumbnail.dataset.artworkDimensions;
+      details.year.textContent = thumbnail.dataset.artworkYear;
+      counter.textContent = String(currentIndex + 1);
+    };
 
-    <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_10.jpeg" width="264px" height="370px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
+    thumbnails.forEach((thumbnail, index) => {
+      thumbnail.addEventListener('click', () => {
+        showArtwork(index);
+        dialog.showModal();
+      });
+    });
 
-    <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_11.jpeg" width="264px" height="186px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
-    <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_12.jpeg" width="264px" height="186px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
-
-    <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_14.jpeg" width="264px" height="190px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
-    <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_15.jpeg" width="264px" height="231px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
-
-
-    <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_17.jpeg" width="264px" height="187px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
-    <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_18.jpeg" width="264px" height="377px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
-    <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_19.jpeg" width="264px" height="377px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
-    <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_20.jpeg" width="264px" height="377px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
-      <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_16.jpeg" width="260px" height="264px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
-        <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_21.jpeg" width="260px" height="264px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-</div><!-- .img-gallery -->
+    dialog.querySelector('[data-artwork-close]').addEventListener('click', () => {
+      dialog.close();
+    });
+    dialog.querySelector('[data-artwork-previous]').addEventListener('click', () => {
+      showArtwork(currentIndex - 1);
+    });
+    dialog.querySelector('[data-artwork-next]').addEventListener('click', () => {
+      showArtwork(currentIndex + 1);
+    });
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') showArtwork(currentIndex - 1);
+      if (event.key === 'ArrowRight') showArtwork(currentIndex + 1);
+    });
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  })();
+</script>

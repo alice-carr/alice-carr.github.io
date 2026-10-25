@@ -38,12 +38,12 @@
 <meta property="og:url" content="http://localhost:4000/recent_work/" />
 <meta property="og:site_name" content="Alice Carr" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-07-19T22:14:20+08:00" />
+<meta property="article:published_time" content="2026-10-26T01:19:58+08:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Recent_work" />
 <meta name="twitter:site" content="@twitter_username" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-07-19T22:14:20+08:00","datePublished":"2026-07-19T22:14:20+08:00","description":"Alice Carr, painter &amp; printmaker based in Edinburgh","headline":"Recent_work","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/recent_work/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/commons/logo.png"}},"url":"http://localhost:4000/recent_work/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-10-26T01:19:58+08:00","datePublished":"2026-10-26T01:19:58+08:00","description":"Alice Carr, painter &amp; printmaker based in Edinburgh","headline":"Recent_work","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/recent_work/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/commons/logo.png"}},"url":"http://localhost:4000/recent_work/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -259,152 +259,582 @@
       recent work
     </h1>
     <div class="content">
-      <head>
-    <style>
+      
 
-    </style>
-</head>
+<style>
+  .artwork-thumbnail {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
 
-<!-- https://blog.logrocket.com/responsive-image-gallery-css-flexbox/ -->
+  .artwork-thumbnail:focus-visible,
+  .artwork-dialog button:focus-visible {
+    outline: 2px solid var(--link-color);
+    outline-offset: 3px;
+  }
 
+  .artwork-dialog {
+    box-sizing: border-box;
+    width: min(90vw, 72rem);
+    max-width: none;
+    max-height: 90vh;
+    overflow: hidden;
+    padding: 1.5rem;
+    border: 0;
+    background: var(--card-bg);
+    color: var(--text-color);
+  }
+
+  .artwork-dialog::backdrop {
+    background: rgb(0 0 0 / 80%);
+  }
+
+  .artwork-dialog__close {
+    display: block;
+    margin: 0 0 0.75rem auto;
+  }
+
+  .artwork-dialog__carousel {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .artwork-dialog__control,
+  .artwork-dialog__close {
+    padding: 0.5rem;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .artwork-dialog__content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(10rem, 0.35fr);
+    align-items: end;
+    gap: 1.5rem;
+    min-width: 0;
+  }
+
+  .artwork-dialog__image {
+    display: block;
+    width: 100%;
+    max-height: calc(90vh - 9rem);
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+
+  .artwork-dialog__details {
+    max-width: 20rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+
+  .artwork-dialog__details dl {
+    margin: 0;
+  }
+
+  .artwork-dialog__details div + div {
+    margin-top: 0.3rem;
+  }
+
+  .artwork-dialog__details dt {
+    font-weight: 600;
+  }
+
+  .artwork-dialog__details dd {
+    margin: 0;
+    color: inherit;
+  }
+
+  .artwork-dialog__count {
+    margin: 0.75rem 0 0;
+    color: var(--text-muted-color);
+    text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    .artwork-dialog {
+      padding: 1rem;
+    }
+
+    .artwork-dialog__image {
+      max-height: calc(90vh - 14rem);
+    }
+
+    .artwork-dialog__content {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.75rem;
+    }
+
+    .artwork-dialog__details {
+      max-width: none;
+    }
+  }
+</style>
 
 <div class="img-gallery">
-  <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_1.jpg" width="264px" height="372px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
-  <div class="img-gallery__item">
-        <figure>
-      <img src="/commons/recent_work/image_2.jpeg" width="264px" height="388px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
-  <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_3.jpeg" width="264px" height="367px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
+  
+    
+    
     <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_4.jpeg" width="368px" height="264px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
-      <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_5.jpeg" width="353px" height="264px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="/commons/portfolio/005_somewhere,%20the%20last%20horse%20is%20standing%20in%20a%20field_watercolour%20and%20biro%20on%20paper_30x21cm_2026.jpeg"
+          data-artwork-title="somewhere, the last horse is standing in a field"
+          data-artwork-medium="Watercolour and biro on paper"
+          data-artwork-dimensions="30x21cm"
+          data-artwork-year="2026"
+          aria-label="View artwork 1"
+        >
+          <img
+            src="/commons/portfolio/005_somewhere,%20the%20last%20horse%20is%20standing%20in%20a%20field_watercolour%20and%20biro%20on%20paper_30x21cm_2026.jpeg"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  
+    
+    
     <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_6.jpeg" width="264px" height="634px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="/commons/portfolio/007_swallow&#39;s%20return_watercolour%20and%20biro%20on%20paper_21x30cm_2026.jpeg"
+          data-artwork-title="Swallow&#39;s Return"
+          data-artwork-medium="Watercolour and biro on paper"
+          data-artwork-dimensions="21x30cm"
+          data-artwork-year="2026"
+          aria-label="View artwork 2"
+        >
+          <img
+            src="/commons/portfolio/007_swallow&#39;s%20return_watercolour%20and%20biro%20on%20paper_21x30cm_2026.jpeg"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  
+    
+    
     <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_7.jpeg" width="264px" height="187px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="/commons/portfolio/009_the%20last%20horse%20is%20standing_oil%20on%20canvas_35x45x2cm_2026.jpeg"
+          data-artwork-title="The Last Horse is Standing"
+          data-artwork-medium="Oil on canvas"
+          data-artwork-dimensions="35x45x2cm"
+          data-artwork-year="2026"
+          aria-label="View artwork 3"
+        >
+          <img
+            src="/commons/portfolio/009_the%20last%20horse%20is%20standing_oil%20on%20canvas_35x45x2cm_2026.jpeg"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  
+    
+    
     <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_9.jpeg" width="264px" height="225px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="/commons/portfolio/034_fish%20bowl_oil%20on%20panel_22x30cm_2026.jpg"
+          data-artwork-title="Fish Bowl"
+          data-artwork-medium="Oil on panel"
+          data-artwork-dimensions="22x30cm"
+          data-artwork-year="2026"
+          aria-label="View artwork 4"
+        >
+          <img
+            src="/commons/portfolio/034_fish%20bowl_oil%20on%20panel_22x30cm_2026.jpg"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  
+    
+    
     <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_10.jpeg" width="264px" height="370px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="/commons/portfolio/035_giant%20horse%20sculpture_acrylic%20on%20linen%20panel_20x30cm_2026.jpeg"
+          data-artwork-title="Giant Horse Sculpture"
+          data-artwork-medium="Acrylic on linen panel"
+          data-artwork-dimensions="20x30cm"
+          data-artwork-year="2026"
+          aria-label="View artwork 5"
+        >
+          <img
+            src="/commons/portfolio/035_giant%20horse%20sculpture_acrylic%20on%20linen%20panel_20x30cm_2026.jpeg"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  
+    
+    
     <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_11.jpeg" width="264px" height="186px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="/commons/portfolio/036_road%20marker_acrylic%20on%20linen%20panel_20x30cm_2026.jpeg"
+          data-artwork-title="Road Marker"
+          data-artwork-medium="Acrylic on linen panel"
+          data-artwork-dimensions="20x30cm"
+          data-artwork-year="2026"
+          aria-label="View artwork 6"
+        >
+          <img
+            src="/commons/portfolio/036_road%20marker_acrylic%20on%20linen%20panel_20x30cm_2026.jpeg"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  
+    
+    
     <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_12.jpeg" width="264px" height="186px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
-
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="/commons/portfolio/039_roller%20coaster%20horse_acrylic%20on%20linen%20panel_20x30cm_2026.jpeg"
+          data-artwork-title="Roller Coaster Horse"
+          data-artwork-medium="Acrylic on linen panel"
+          data-artwork-dimensions="20x30cm"
+          data-artwork-year="2026"
+          aria-label="View artwork 7"
+        >
+          <img
+            src="/commons/portfolio/039_roller%20coaster%20horse_acrylic%20on%20linen%20panel_20x30cm_2026.jpeg"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  
+    
+    
     <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_14.jpeg" width="264px" height="190px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="/commons/portfolio/040_gallop%20against%20a%20red%20sky_acrylic%20on%20cradled%20wooden%20panel_15x20x2cm_2026.jpeg"
+          data-artwork-title="Gallop Against a Red Sky"
+          data-artwork-medium="Acrylic on cradled wooden panel"
+          data-artwork-dimensions="15x20x2cm"
+          data-artwork-year="2026"
+          aria-label="View artwork 8"
+        >
+          <img
+            src="/commons/portfolio/040_gallop%20against%20a%20red%20sky_acrylic%20on%20cradled%20wooden%20panel_15x20x2cm_2026.jpeg"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  
+    
+    
     <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_15.jpeg" width="264px" height="231px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
-
-
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="/commons/portfolio/59aomtic%20horse%202.jpeg"
+          data-artwork-title="atomic horse #3"
+          data-artwork-medium="Acrylic on panel"
+          data-artwork-dimensions="20x30cm"
+          data-artwork-year="2026"
+          aria-label="View artwork 9"
+        >
+          <img
+            src="/commons/portfolio/59aomtic%20horse%202.jpeg"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  
+    
+    
     <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_17.jpeg" width="264px" height="187px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="/commons/portfolio/61.jpeg"
+          data-artwork-title="see it in the stars"
+          data-artwork-medium="Acrylic on panel"
+          data-artwork-dimensions="14x21cm"
+          data-artwork-year="2026"
+          aria-label="View artwork 10"
+        >
+          <img
+            src="/commons/portfolio/61.jpeg"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  
+    
+    
     <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_18.jpeg" width="264px" height="377px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="/commons/portfolio/63.jpeg"
+          data-artwork-title="Anatomy of a horse"
+          data-artwork-medium="Pencil and collage on paper"
+          data-artwork-dimensions="30x42cm"
+          data-artwork-year="2026"
+          aria-label="View artwork 11"
+        >
+          <img
+            src="/commons/portfolio/63.jpeg"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  
+    
+    
     <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_19.jpeg" width="264px" height="377px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="/commons/portfolio/image_1.jpg"
+          data-artwork-title="disassembled horse"
+          data-artwork-medium="Add medium"
+          data-artwork-dimensions="Add dimensions"
+          data-artwork-year="Add year"
+          aria-label="View artwork 12"
+        >
+          <img
+            src="/commons/portfolio/image_1.jpg"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  
+    
+    
     <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_20.jpeg" width="264px" height="377px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="/commons/portfolio/image_10.jpeg"
+          data-artwork-title="caged parrot"
+          data-artwork-medium="Acrylic on wood"
+          data-artwork-dimensions="18.6x12.6x2cm"
+          data-artwork-year="2025"
+          aria-label="View artwork 13"
+        >
+          <img
+            src="/commons/portfolio/image_10.jpeg"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  
+    
+    
+    <div class="img-gallery__item">
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="/commons/portfolio/image_2.jpeg"
+          data-artwork-title="show pony"
+          data-artwork-medium="Acrylic on paper"
+          data-artwork-dimensions="14x21cm"
+          data-artwork-year="2025"
+          aria-label="View artwork 14"
+        >
+          <img
+            src="/commons/portfolio/image_2.jpeg"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  
+    
+    
+    <div class="img-gallery__item">
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="/commons/portfolio/image_3.jpeg"
+          data-artwork-title="the swimmer"
+          data-artwork-medium="Oil on wood"
+          data-artwork-dimensions="14x21cm"
+          data-artwork-year="2025"
+          aria-label="View artwork 15"
+        >
+          <img
+            src="/commons/portfolio/image_3.jpeg"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  
+    
+    
+    <div class="img-gallery__item">
+      <figure>
+        <button
+          class="artwork-thumbnail"
+          type="button"
+          data-artwork-src="/commons/portfolio/image_9.jpeg"
+          data-artwork-title="toy horse"
+          data-artwork-medium="pencil on paper"
+          data-artwork-dimensions="49x42cm"
+          data-artwork-year="2026"
+          aria-label="View artwork 16"
+        >
+          <img
+            src="/commons/portfolio/image_9.jpeg"
+            alt="Artwork by Alice Carr"
+            loading="lazy"
+          >
+        </button>
+      </figure>
+    </div>
+  
+</div>
 
-      <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_16.jpeg" width="260px" height="264px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
+<dialog class="artwork-dialog" aria-label="Artwork carousel">
+  <button class="artwork-dialog__close" type="button" data-artwork-close aria-label="Close carousel">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="artwork-dialog__carousel">
+    <button class="artwork-dialog__control" type="button" data-artwork-previous aria-label="Previous image">
+      <span aria-hidden="true">&lsaquo;</span>
+    </button>
+    <div class="artwork-dialog__content">
+      <img class="artwork-dialog__image" data-artwork-image src="" alt="">
+      <div class="artwork-dialog__details">
+        <dl>
+          <dd data-artwork-title></dd>
+          <dd data-artwork-medium></dd>
+          <dd data-artwork-dimensions></dd>
+          <dd data-artwork-year></dd>
+        </dl>
+      </div>
+    </div>
+    <button class="artwork-dialog__control" type="button" data-artwork-next aria-label="Next image">
+      <span aria-hidden="true">&rsaquo;</span>
+    </button>
+  </div>
+  <p class="artwork-dialog__count" aria-live="polite">
+    <span data-artwork-current></span> / 16
+  </p>
+</dialog>
 
-        <div class="img-gallery__item">
-    <figure>
-      <img src="/commons/recent_work/image_21.jpeg" width="260px" height="264px" alt="...">
-      <figcaption></figcaption>
-    </figure>
-  </div><!-- .img-gallery__item -->
-</div><!-- .img-gallery -->
+<script>
+  (() => {
+    const thumbnails = Array.from(document.querySelectorAll('.artwork-thumbnail'));
+    const dialog = document.querySelector('.artwork-dialog');
+    if (!dialog || thumbnails.length === 0) return;
+
+    const image = dialog.querySelector('[data-artwork-image]');
+    const counter = dialog.querySelector('[data-artwork-current]');
+    const details = {
+      title: dialog.querySelector('[data-artwork-title]'),
+      medium: dialog.querySelector('[data-artwork-medium]'),
+      dimensions: dialog.querySelector('[data-artwork-dimensions]'),
+      year: dialog.querySelector('[data-artwork-year]')
+    };
+    let currentIndex = 0;
+
+    const showArtwork = (index) => {
+      currentIndex = (index + thumbnails.length) % thumbnails.length;
+      const thumbnail = thumbnails[currentIndex];
+      image.src = thumbnail.dataset.artworkSrc;
+      image.alt = thumbnail.dataset.artworkTitle;
+      details.title.textContent = thumbnail.dataset.artworkTitle;
+      details.medium.textContent = thumbnail.dataset.artworkMedium;
+      details.dimensions.textContent = thumbnail.dataset.artworkDimensions;
+      details.year.textContent = thumbnail.dataset.artworkYear;
+      counter.textContent = String(currentIndex + 1);
+    };
+
+    thumbnails.forEach((thumbnail, index) => {
+      thumbnail.addEventListener('click', () => {
+        showArtwork(index);
+        dialog.showModal();
+      });
+    });
+
+    dialog.querySelector('[data-artwork-close]').addEventListener('click', () => {
+      dialog.close();
+    });
+    dialog.querySelector('[data-artwork-previous]').addEventListener('click', () => {
+      showArtwork(currentIndex - 1);
+    });
+    dialog.querySelector('[data-artwork-next]').addEventListener('click', () => {
+      showArtwork(currentIndex + 1);
+    });
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') showArtwork(currentIndex - 1);
+      if (event.key === 'ArrowRight') showArtwork(currentIndex + 1);
+    });
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  })();
+</script>
+
     </div>
   
 </article>
